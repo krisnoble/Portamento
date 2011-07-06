@@ -85,9 +85,15 @@
 		var panel = this;
 		var wrapper = opts.wrapper;
 		var gap = opts.gap;
-		var disableWorkaround = opts.disableWorkaround;
-		
+		var disableWorkaround = opts.disableWorkaround;		
 		var fullyCapableBrowser = positionFixedSupported();
+		
+		if(this.length != 1) {
+			// die gracefully if the user has tried to pass multiple elements 
+			// (multiple element support is on the TODO list!) or no elements...
+			alert('sdfdsf');
+			return this;
+		}
 		
 		if(!fullyCapableBrowser && disableWorkaround) {
 			// just stop here, as the dev doesn't want to use the workaround
