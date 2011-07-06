@@ -33,13 +33,15 @@
 					<li><a href="demos/bigger-gap.html">No bottom boundary and a bigger top margin</a></li>
 					<li><a href="demos/floated-with-bottom-limit.html">Floated layout with a bottom boundary</a></li>
 					<li><a href="demos/absolute-with-bottom-limit.html">Absolute layout with a bottom boundary</a></li>
+					<li><a href="demos/no-workaround.html">Disable support for not-quite-capable browsers (see FAQ)</a></li>
 				</ul>
 				
 				<h2>Usage</h2>
-				<p>Using Portamento is easy. Just include portamento.js and the viewportOffset plugin in your page, then run the portamento() method on the element that you want to slide.</p>
-				<p>There are a couple of options:</p>
+				<p>Using Portamento is easy. Just include portamento.js in your page, then run the portamento() method on the element that you want to slide.</p>
+				<p>There are a few options:</p>
 				<p><strong>wrapper</strong> - the element that contains the sliding panel. The sliding panel won't go out of its wrapper's boundaries, and respects the wrapper's padding. The default wrapper is the document's <code>&lt;body&gt;</code>.</p>
 				<p><strong>gap</strong> - the number of pixels to leave between the top of the viewport and the top of the sliding panel. The default value is 10. </p>
+				<p><strong>disableWorkaround</strong> - disable the workaround for not-quite capable browsers. Some users will lose the sliding functionality, but the content will still be there.</p>
 				
 				<p>Use it like this:</p>
 				<p><code class="example">$('#sidebar').portamento({wrapper: $('#wrapper'), gap: 20});</code></p>
@@ -49,19 +51,30 @@
 				<p>See the demos for examples of portamento being used in various situations.</p>
 				
 				<h2>FAQ</h2>
-				<ul>
+				<ul id="faq">
 					<li>
 						<p class="q" id="browser_support">What browsers will Portamento work with?</p>
-						<p>Anything that supports the CSS property <code>position: fixed</code>. That means IE7+, Firefox 3+, Safari 4+, Chrome 4+, Opera 10+ and possibly earlier versions of everything except IE (<span lang="fr">quelle surprise!</span>).</p>
-						
+						<p>Anything that supports the CSS property <code>position: fixed</code> is classed as a fully-capable browser. That means IE7+, Firefox 3+, Safari 4+ (non-iOS), Chrome 4+, Opera 10+ and possibly earlier versions of everything except IE (<span lang="fr" title="What a surprise!">quelle surprise!</span>).</p>
+					</li>
+					<li>
+						<p class="q">What happens to other browsers?</p>
+						<p>Not-quite-capable browsers (including iOS browsers and IE<7) are supported via a workaround - not quite as smooth, but preserves the functionality. The workaround can be disabled with the <code>disableWorkaround</code> option.</p>		
+					</li>
+					<li>
 						<p class="q">I can't get it working - I need help!</p>
 						<p>No worries - get in touch via email or on Twitter and I'll do my best to help you out.</p>
-						
+					</li>
+					<li>	
 						<p class="q">It's broken, you suck!</p>
 						<p>Yikes, sorry. Get in touch and I'll try to get it sorted. Or if you like, fork Portamento on Github and submit the fix yourself - you'll earn my eternal gratitude and a mention on this page, leading to fame and fortune (not guaranteed).</p>
-						
+					</li>
+					<li>
 						<p class="q">What license is Portamento released under?</p>
 						<p>Portamento is released under the <a rel="license" href="http://www.gnu.org/licenses/gpl-3.0.txt">GPLv3 license</a> - basically, this means you can do pretty much what you want with it as long as any resultant works are released under a similar license. If you're not sure, get in touch and I'll be happy to help.</p>
+					</li>
+					<li>	
+						<p class="q">Portamento? WTF is that?</p>
+						<p>Portamento is the musical term for a note that slides smoothly between two pitches - geddit? You can <a href="http://en.wikipedia.org/wiki/Portamento">read all about it on Wikipedia</a> if you like. </p>
 					</li>
 				</ul>
 				
@@ -90,7 +103,6 @@
 		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-		<script src="viewportoffset.js"></script>
 		<script src="portamento.js"></script>		
 		<script>
 			$('#sidebar').portamento({wrapper: $('#wrapper')});	

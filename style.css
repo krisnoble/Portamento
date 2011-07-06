@@ -28,5 +28,7 @@ p#wtf {position: absolute; bottom:0; padding:10px; background:#585; color: #fff;
 
 #portamento_container {position:absolute; right:0; top:0;}
 #portamento_container #sidebar {position:absolute;}
-#portamento_container #sidebar.fixed {position:fixed; right:auto; top:auto;}
+#portamento_container #sidebar.fixed {position:fixed; right:auto; top:auto;  z-index:100;}
 p.q {font-weight:bold; margin-bottom:0; color:#999;}
+#faq li {margin-bottom:1.5em;}
+span[lang=fr] {font-style:italic; font-family: "Droid Serif", Georgia, "Times New Roman", serif; border-bottom:1px dotted #666;}

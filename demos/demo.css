@@ -1,0 +1,8 @@
+* {margin:0; padding:0;}
+body {background-color:#fff; padding:50px; width:850px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
+h1 {margin-bottom:1em; font-size:3em; font-family: Georgia, "Times New Roman", serif; font-weight:normal;}
+p {margin-bottom:1.5em; color:#ccc;}
+p:first-of-type{color:#000;}
+a {color:#090; text-decoration: none;}
+footer {margin:0 0 1000px 0; padding-top:20px; border-top: 1px solid red; position:relative;}
+small {font-family: Georgia, "Times New Roman", serif; font-weight:normal; font-style:italic; color:#000;}

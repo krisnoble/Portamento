@@ -8,24 +8,21 @@
 		<meta name="author" content="Kris Noble" />
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 		
+		<!-- just some default styles, nothing important -->
+		<link rel="stylesheet" href="demo.css" />
+		
+		<!-- the important styles are below... -->
 		<style>
-			* {margin:0; padding:0;}
-			body {background-color:#fff; padding:50px; width:850px; font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
-			h1 {margin-bottom:1em; font-size:3em; font-family: Georgia, "Times New Roman", serif; font-weight:normal;}
-			p {margin-bottom:1.5em; color:#ccc;}
-			p:first-of-type{color:#000;}
-			a {color:#090; text-decoration: none;}
-			div{margin:0; padding:0;}
 			#wrapper {overflow: hidden;}
 			#content {width:486px; margin-right:10px; float:left; min-height:1200px;}
 			#sidebar {width:284px; padding:10px; background: #eee; float:right; height:600px;}
-			footer {margin:0 0 1000px 0; padding-top:20px; border-top: 1px solid #ccc;}
-			small {font-family: Georgia, "Times New Roman", serif; font-weight:normal; font-style:italic; color:#000;}
 			
-			#portamento_container {float:right; position:relative;}
-			#portamento_container #sidebar {float:none; position:absolute;}
-			#portamento_container #sidebar.fixed {position:fixed;}
+			#portamento_container {float:right; position:relative;} /* take the positioning of the sidebar, and become the start point for the sidebar positioning */
+			#portamento_container #sidebar {float:none; position:absolute;} /* no need to flat anymore, become absolutely positoned */
+			#portamento_container #sidebar.fixed {position:fixed;} /* if the panel is sliding, it needs position:fixed */
 		</style>
+		
+		<!-- looking for the JS? It's just before </body> -->
 	</head>
 
 	<body>
@@ -68,11 +65,9 @@
 		</div>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-		<script src="../viewportoffset.js"></script>
-		<script src="../portamento.js"></script>
-		
+		<script src="../portamento.js"></script>		
 		<script>
-			$('#sidebar').portamento({gap: 100});	
+			$('#sidebar').portamento({gap: 100});	// set a 100px gap rather than the default 10px
 		</script>
 		
 	</body>
