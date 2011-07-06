@@ -8,7 +8,7 @@
 		<meta name="author" content="Kris Noble" />
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
 		
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="css/style.css" />
 
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -22,7 +22,7 @@
 		</header>
 		
 		<div id="wrapper">
-			<div id="content">
+			<article id="content">
 				<p>Portamento is a jQuery plugin that makes it simple to add sliding panel functionality to your web page. All that's needed is a couple of lines of CSS and one line of JavaScript, and you're away!</p>	
 				<p>It works fine with floated and absolutely-positioned layouts, in all modern browsers and some not-so-modern ones too.</p>
 				<p>Portamento also has sensible behaviour if the user's viewport is too small to display the whole panel, so you don't need to worry about users not being able to see your important content.</p>
@@ -37,18 +37,37 @@
 				</ul>
 				
 				<h2>Usage</h2>
-				<p>Using Portamento is easy. Just include portamento.js in your page, then run the portamento() method on the element that you want to slide.</p>
-				<p>There are a few options:</p>
+				<p>Using Portamento is easy. Just follow the steps below and you'll have a smooth sliding panel in no time!</p>
+				<ol id ="usage">
+					<li class="step_1">
+						<p>Include portamento.js in your page:</p>
+						<p><code class="example">&lt;script src="portamento.js"&gt;&lt;/script&gt;</code></p>
+					</li>
+					<li class="step_2">
+						<p>Apply the plugin to the element you want to slide:</p>
+						<p><code class="example">$('#example').portamento();</code></p>
+					</li>
+					<li class="step_3">
+						<p>Do a bit of CSS. Portamento wraps your sliding panel in an element with the ID <code>portamento_wrapper</code>. <code>#portamento_wrapper</code> takes care of positioning your sliding panel correctly, to avoid any nasty jumping around. The panel will have a class of <code>fixed</code> when it's sliding, so give that <code>position:fixed</code>.</p>
+						<p><code class="example">#portamento_container {float:right; position:relative;} <br />
+												#portamento_container #sidebar {float:none; position:absolute;} <br />
+												#portamento_container #sidebar.fixed {position:fixed;}</code></p>
+						<p class="important">This might look scary, but it's really quite simple. Check out the demo source for real-world examples.</p>
+					</li>
+					<li class="step_4">
+						<p>Customize Portamento with any options you want:</p>
+						<p><code class="example">$('#example').portamento({wrapper: $('#example_wrapper'), gap: 50});</code></p>
+					</li>
+					<li class="step_5">
+						<p>Get sliding!</p>
+					</li>
+				</ol>
+				
+				<h3>Options</h3>
+				<p>You can customise Portamento with the following options:</p>
 				<p><strong>wrapper</strong> - the element that contains the sliding panel. The sliding panel won't go out of its wrapper's boundaries, and respects the wrapper's padding. The default wrapper is the document's <code>&lt;body&gt;</code>.</p>
 				<p><strong>gap</strong> - the number of pixels to leave between the top of the viewport and the top of the sliding panel. The default value is 10. </p>
 				<p><strong>disableWorkaround</strong> - disable the workaround for not-quite capable browsers. Some users will lose the sliding functionality, but the content will still be there.</p>
-				
-				<p>Use it like this:</p>
-				<p><code class="example">$('#sidebar').portamento({wrapper: $('#wrapper'), gap: 20});</code></p>
-				
-				<p>Portamento wraps your sliding panel in an element with the ID <code>portamento_wrapper</code>. <code>#portamento_wrapper</code> needs to take up the positioning of your panel so that things don't jump around the page.</p>
-				<p>When the panel is sliding, it will be given the classname <code>fixed</code>. When the panel has the <code>fixed</code> class, it needs to have <code>position: fixed</code> set in the CSS.</p>
-				<p>See the demos for examples of portamento being used in various situations.</p>
 				
 				<h2>FAQ</h2>
 				<ul id="faq">
@@ -79,18 +98,38 @@
 				</ul>
 				
 				<h2>Version History</h2>
-				<p><strong>1.0</strong> - initial release.</p>								
-			</div>
+				<p><strong>1.0</strong> - initial release.</p>
+				
+				<h2 id="comments">Comments</h2>
+				<div id="disqus_thread"></div>
+				<script type="text/javascript">
+				    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+				    var disqus_shortname = 'portamento'; // required: replace example with your forum shortname
+				
+				    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+				    var disqus_identifier = 'portamento_permalink';
+				    var disqus_url = 'http://simianstudios.com/portamento';
+				
+				    /* * * DON'T EDIT BELOW THIS LINE * * */
+				    (function() {
+				        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+				        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+				        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				    })();
+				</script>
+				<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+				<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>								
+			</article>
 			
-			<div id="sidebar">
+			<aside id="sidebar">
 				<h2>Download</h2>
-				<p><a href="portamento.zip">Download Portamento</a> now, or you can be flashy and <a href="https://github.com/krisnoble">fork it on GitHub</a>.</p>
+				<p><a href="portamento.js">Download Portamento</a> now, or you can be flashy and <a href="https://github.com/krisnoble">fork it on GitHub</a>.</p>
 				
 				<h2>Share</h2>
 				<p id="share_buttons"><a href="http://twitter.com/share" class="twitter-share-button" data-url="http://simianstudios.com/portamento" data-text="Portamento - easy sliding panels in jQuery" data-count="horizontal" data-via="simianstudios">Tweet</a><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fsimianstudios.com%2Fportamento&amp;send=false&amp;layout=button_count&amp;width=90&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font=arial&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:20px;" allowTransparency="true"></iframe>
 				<h2>Contact</h2>
 				<p>Got questions, feature requests or - perish the thought - bug reports? Get in touch via <a href="/contact">email</a> or <a href="http://twitter.com/simianstudios">Twitter</a>!</p>
-			</div>
+			</aside>
 		</div>
 
 		<footer>

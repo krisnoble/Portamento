@@ -18,7 +18,7 @@
 			#sidebar {width:284px; padding:10px; background: #eee; float:right; height:600px;}
 			
 			#portamento_container {float:right; position:relative;} /* take the positioning of the sidebar, and become the start point for the sidebar positioning */
-			#portamento_container #sidebar {float:none; position:absolute;} /* no need to flat anymore, become absolutely positoned */
+			#portamento_container #sidebar {float:none; position:absolute;} /* no need to float anymore, become absolutely positoned */
 			#portamento_container #sidebar.fixed {position:fixed;} /* if the panel is sliding, it needs position:fixed */
 		</style>
 		
@@ -33,7 +33,7 @@
 			
 			<div id="wrapper">
 				<div id="content">
-					<p>This shows Portamento's default behaviour - no bottom boundary and a 10px gap from the top of the viewport.</p>
+					<p>This shows Portamento's behaviour if the workaround is disabled for not-quite capable browsers - capable browsers should work as normal, not-quite-capable ones won't get any sliding.</p>
 					<p>Bacon ipsum dolor sit amet do t-bone laborum, ad ground round turkey ball tip. Veniam aliqua jowl, duis in t-bone sint tongue fugiat. Pork loin tenderloin ad, veniam chicken meatloaf.</p>
 					<p>Bacon ipsum dolor sit amet do t-bone laborum, ad ground round turkey ball tip. Veniam aliqua jowl, duis in t-bone sint tongue fugiat. Pork loin tenderloin ad, veniam chicken meatloaf.</p>
 					<p>Bacon ipsum dolor sit amet do t-bone laborum, ad ground round turkey ball tip. Veniam aliqua jowl, duis in t-bone sint tongue fugiat. Pork loin tenderloin ad, veniam chicken meatloaf.</p>
@@ -67,7 +67,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 		<script src="../portamento.js"></script>		
 		<script>
-			$('#sidebar').portamento({disableWorkaround: true}); // disable the workaroundfor not-quite-capable browsers e.g. iOS, IE<7	
+			$('#sidebar').portamento({disableWorkaround: true}); // disable the workaround for not-quite-capable browsers e.g. iOS, IE<7	
 		</script>
 		
 	</body>
