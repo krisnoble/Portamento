@@ -1,0 +1,32 @@
+* {margin:0; padding:0;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display:block;}
+body {background-color:#fff; padding:50px; margin:0 auto;  width:850px; font-family:"Droid Sans", "Helvetica Neue", Arial, Helvetica, sans-serif; position:relative;}
+
+h1 {margin-bottom:1em; font-size:3em; font-family: "Droid Serif", Georgia, "Times New Roman", serif; font-weight:normal;}
+h1 span {color:#eee;-webkit-transition: color 0.5s ease-in-out; -moz-transition: color 0.5s ease-in-out; -o-transition: color 0.5s ease-in-out; -ms-transition: color 0.5s ease-in-out;  transition: color 0.5s ease-in-out;}
+h1:hover span {color:#999;}
+h2 {margin-bottom:0.5em; font-size:2em; font-family: "Droid Serif", Georgia, "Times New Roman", serif; font-weight:normal;}
+h3 {margin-bottom:0.25em; font-size:1.5em; font-family: "Droid Serif", Georgia, "Times New Roman", serif; font-weight:normal;}
+#content h2, #content h3 { border-top:1px solid #ccc; padding-top:20px;}
+#sidebar h2, #sidrebar h3 { border-top:1px solid #fff; padding-top:20px;}
+#sidebar h2:first-of-type {border:none; padding-top:0;}
+
+p, ul {margin-bottom:1.5em; color:#000;}
+li {margin-bottom:0.5em; style-type:none;}
+a {color:#585; text-decoration: none;}
+#wrapper p:last-of-type{margin-bottom:0;}
+code, pre{font-family: Menlo,"Courier New",Courier,monospace; font-size:0.9em;}
+code.example {font-size:0.8em;}
+
+#wrapper {overflow: hidden; position:relative; padding-bottom: 1.5em;}
+#content {width:486px; margin-right:10px;}
+#sidebar {width:284px; padding:10px; background: #d8e8d8; position:absolute; right:0; top:0;}
+
+footer {margin:0 0 1000px 0; padding-top:20px; border-top: 5px solid #999;}
+small {font-family: "Droid Serif", Georgia, "Times New Roman", serif; font-weight:normal; font-style:italic; color:#000;}
+p#wtf {position: absolute; bottom:0; padding:10px; background:#585; color: #fff; margin:0; border-radius:10px 10px 0 0;}
+
+#portamento_container {position:absolute; right:0; top:0;}
+#portamento_container #sidebar {position:absolute;}
+#portamento_container #sidebar.fixed {position:fixed; right:auto; top:auto;}
+p.q {font-weight:bold; margin-bottom:0; color:#999;}
