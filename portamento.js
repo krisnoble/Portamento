@@ -24,55 +24,59 @@
  */
 (function($){
   	
-  	
-  	/*!
-	 * jQuery viewportOffset - v0.3 - 2/3/2010
-	 * http://benalman.com/projects/jquery-misc-plugins/
-	 * 
-	 * Copyright (c) 2010 "Cowboy" Ben Alman
-	 * Dual licensed under the MIT and GPL licenses.
-	 * http://benalman.com/about/license/
-	 */	
-  	$.fn.viewportOffset = function() {
-		var win = $(window);
-		var offset = $(this).offset();
-  
-		return {
-    		left: offset.left - win.scrollLeft(),
-      		top: offset.top - win.scrollTop()
-    	};
-  	};
-	
-	/**
-	 * 
-	 * A test to see if position:fixed is supported.
-	 * Taken from CFT by Kangax - http://kangax.github.com/cft/#IS_POSITION_FIXED_SUPPORTED
-	 * 
-	 */
-	function positionFixedSupported () {
-		var container = document.body;
-  		if (document.createElement && container && container.appendChild && container.removeChild) {
-      		var el = document.createElement("div");
-	  		if (!el.getBoundingClientRect) {
-	      		return null;
-	  		}
-	  		el.innerHTML = "x";
-	  		el.style.cssText = "position:fixed;top:100px;";
-	  		container.appendChild(el);
-	  		var originalHeight = container.style.height, originalScrollTop = container.scrollTop;
-	 		container.style.height = "3000px";
-	      	container.scrollTop = 500;
-	      	var elementTop = el.getBoundingClientRect().top;
-	      	container.style.height = originalHeight;
-	      	var isSupported = elementTop === 100;
-	      	container.removeChild(el);
-	      	container.scrollTop = originalScrollTop;
-	      	return isSupported;
-  		}
-  		return null;
-	}
-
 	$.fn.portamento = function(options) {
+		
+		/*!
+		 * NOTE by Kris - included here so as to avoid namespace clashes.
+		 * 
+		 * jQuery viewportOffset - v0.3 - 2/3/2010
+		 * http://benalman.com/projects/jquery-misc-plugins/
+		 * 
+		 * Copyright (c) 2010 "Cowboy" Ben Alman
+		 * Dual licensed under the MIT and GPL licenses.
+		 * http://benalman.com/about/license/
+		 */	
+	  	$.fn.viewportOffset = function() {
+			var win = $(window);
+			var offset = $(this).offset();
+	  
+			return {
+	    		left: offset.left - win.scrollLeft(),
+	      		top: offset.top - win.scrollTop()
+	    	};
+	  	};
+		
+		/**
+		 * 
+		 * A test to see if position:fixed is supported.
+		 * Taken from CFT by Kangax - http://kangax.github.com/cft/#IS_POSITION_FIXED_SUPPORTED
+		 * Included here so as to avoid namespace clashes.
+		 * 
+		 */
+		function positionFixedSupported () {
+			var container = document.body;
+	  		if (document.createElement && container && container.appendChild && container.removeChild) {
+	      		var el = document.createElement("div");
+		  		if (!el.getBoundingClientRect) {
+		      		return null;
+		  		}
+		  		el.innerHTML = "x";
+		  		el.style.cssText = "position:fixed;top:100px;";
+		  		container.appendChild(el);
+		  		var originalHeight = container.style.height, originalScrollTop = container.scrollTop;
+		 		container.style.height = "3000px";
+		      	container.scrollTop = 500;
+		      	var elementTop = el.getBoundingClientRect().top;
+		      	container.style.height = originalHeight;
+		      	var isSupported = elementTop === 100;
+		      	container.removeChild(el);
+		      	container.scrollTop = originalScrollTop;
+		      	return isSupported;
+	  		}
+	  		return null;
+		}
+		
+		// ---------------------------------------------------------------------------------------------------
 			    
 		// get the definitive options
 		var opts = $.extend({}, $.fn.portamento.defaults, options);
