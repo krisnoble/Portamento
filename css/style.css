@@ -1,14 +1,14 @@
 * {margin:0; padding:0;}
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display:block; background: transparent;}
-body {background-color:#fff; padding:50px; margin:0 auto;  width:850px; font-family:"Droid Sans", "Helvetica Neue", Arial, Helvetica, sans-serif; position:relative;}
+body {background-color:#fff; padding:50px; margin:0 auto;  width:850px; font-family:"Droid Sans", "Helvetica Neue", Arial, Helvetica, sans-serif; position:relative; line-height:1.3em;}
 
-h1 {margin-bottom:1em; font-size:3em; font-family: "Droid Serif", Georgia, "Times New Roman", serif; font-weight:normal;}
+h1 {margin-bottom:1em; font-size:3em; font-family: "Droid Serif", Georgia, "Times New Roman", serif; font-weight:normal; line-height:1.4em;}
 h1 span {color:#eee;-webkit-transition: color 0.5s ease-in-out; -moz-transition: color 0.5s ease-in-out; -o-transition: color 0.5s ease-in-out; -ms-transition: color 0.5s ease-in-out;  transition: color 0.5s ease-in-out;}
 h1:hover span {color:#999;}
-h2 {margin-bottom:0.5em; font-size:2em; font-family: "Droid Serif", Georgia, "Times New Roman", serif; font-weight:normal;}
-h3 {margin-bottom:0.25em; font-size:1.5em; font-family: "Droid Serif", Georgia, "Times New Roman", serif; font-weight:normal;}
+h2 {margin-bottom:0.5em; font-size:2em; font-family: "Droid Serif", Georgia, "Times New Roman", serif; font-weight:normal; line-height:1.3em;}
+h3 {margin-bottom:0.25em; font-size:1.5em; font-family: "Droid Serif", Georgia, "Times New Roman", serif; font-weight:normal; line-height:1.2em;}
 #content h2, #content h3 { border-top:1px solid #ccc; padding-top:20px;}
-#sidebar h2, #sidrebar h3 { border-top:1px solid #fff; padding-top:20px;}
+#sidebar h2, #sidebar h3 { border-top:1px solid #fff; padding-top:20px;}
 #sidebar h2:first-of-type {border:none; padding-top:0;}
 
 p, ul {margin-bottom:1.5em; color:#000;}
