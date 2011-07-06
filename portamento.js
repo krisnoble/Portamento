@@ -162,8 +162,8 @@
 	
 	// set some sensible defaults
 	$.fn.portamento.defaults = {
-	  'wrapper'				: $('body'), // wrapper will go in a $() construct, so it could be a tag name or more likely an id e.g. '#wrapper'
-	  'gap'					: 10, // gap is the gap left between the top of the viewport and the top of the panel
+	  'wrapper'				: $('body'), // the element that will act as the sliding panel's boundaries
+	  'gap'					: 10, // the gap left between the top of the viewport and the top of the panel
 	  'disableWorkaround' 	: false // option to disable the workaround for not-quite capable browsers 
 	};
 	
