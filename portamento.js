@@ -9,11 +9,14 @@
  * 
  * ----
  * 
- * Uses the viewportOffset plugin by Ben Alman aka Cowboy
+ * Uses the viewportOffset plugin by Ben Alman aka Cowboy:
  * http://benalman.com/projects/jquery-misc-plugins/#viewportoffset
  * 
- * and a portion of CFT by Juriy Zaytsev aka Kangax
+ * and a portion of CFT by Juriy Zaytsev aka Kangax:
  * http://kangax.github.com/cft/#IS_POSITION_FIXED_SUPPORTED
+ * 
+ * Builds on work by Remy Sharp:
+ * http://jqueryfordesigners.com/fixed-floating-elements/
  * 
  * ----
  *  
@@ -88,10 +91,9 @@
 		var disableWorkaround = opts.disableWorkaround;		
 		var fullyCapableBrowser = positionFixedSupported();
 		
-		if(this.length != 1) {
+		if(panel.length != 1) {
 			// die gracefully if the user has tried to pass multiple elements 
 			// (multiple element support is on the TODO list!) or no elements...
-			alert('sdfdsf');
 			return this;
 		}
 		
@@ -165,6 +167,11 @@
 			}
 		});
 		
+		// ---------------------------------------------------------------------------------------------------
+		
+		// trigger the scroll event so that the panel is positioned correctly if the page loads anywhere other than the top.
+		$(window).trigger('scroll.portamento');
+		
 	    // return this to maintain chainability
 	    return this;
 	
@@ -173,7 +180,7 @@
 	// set some sensible defaults
 	$.fn.portamento.defaults = {
 	  'wrapper'				: $('body'), // the element that will act as the sliding panel's boundaries
-	  'gap'					: 10, // the gap left between the top of the viewport and the top of the panel
+	  'gap'					: 10, // the gap (in pixels) left between the top of the viewport and the top of the panel
 	  'disableWorkaround' 	: false // option to disable the workaround for not-quite capable browsers 
 	};
 	
