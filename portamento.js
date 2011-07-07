@@ -12,8 +12,11 @@
  * Uses the viewportOffset plugin by Ben Alman aka Cowboy:
  * http://benalman.com/projects/jquery-misc-plugins/#viewportoffset
  * 
- * and a portion of CFT by Juriy Zaytsev aka Kangax:
+ * Uses a portion of CFT by Juriy Zaytsev aka Kangax:
  * http://kangax.github.com/cft/#IS_POSITION_FIXED_SUPPORTED
+ * 
+ * Uses code by Matthew Eernisse to detect scrollbar width:
+ * http://www.fleegix.org/articles/2006-05-30-getting-the-scrollbar-width-in-pixels
  * 
  * Builds on work by Remy Sharp:
  * http://jqueryfordesigners.com/fixed-floating-elements/
@@ -79,6 +82,53 @@
 	  		return null;
 		}
 		
+		/**
+		 * 
+		 * Get the scrollbar width by Matthew Eernisse.
+		 * http://www.fleegix.org/articles/2006-05-30-getting-the-scrollbar-width-in-pixels
+		 * Included here so as to avoid namespace clashes.
+		 * 
+		 */
+		function getScrollerWidth() {
+		    var scr = null;
+		    var inn = null;
+		    var wNoScroll = 0;
+		    var wScroll = 0;
+		
+		    // Outer scrolling div
+		    scr = document.createElement('div');
+		    scr.style.position = 'absolute';
+		    scr.style.top = '-1000px';
+		    scr.style.left = '-1000px';
+		    scr.style.width = '100px';
+		    scr.style.height = '50px';
+		    // Start with no scrollbar
+		    scr.style.overflow = 'hidden';
+		
+		    // Inner content div
+		    inn = document.createElement('div');
+		    inn.style.width = '100%';
+		    inn.style.height = '200px';
+		
+		    // Put the inner div in the scrolling div
+		    scr.appendChild(inn);
+		    // Append the scrolling div to the doc
+		    document.body.appendChild(scr);
+		
+		    // Width of the inner div sans scrollbar
+		    wNoScroll = inn.offsetWidth;
+		    // Add the scrollbar
+		    scr.style.overflow = 'auto';
+		    // Width of the inner div width scrollbar
+		    wScroll = inn.offsetWidth;
+		
+		    // Remove the scrolling div from the doc
+		    document.body.removeChild(document.body.lastChild);
+		
+		    // Pixel width of the scroller
+		    return (wNoScroll - wScroll);
+		}
+		
 		// ---------------------------------------------------------------------------------------------------
 			    
 		// get the definitive options
@@ -112,12 +162,20 @@
 		var panelMargin = parseFloat(panel.css('marginTop').replace(/auto/, 0));
 		var realPanelOffset = panelOffset - panelMargin;
 		var topScrollBoundary = realPanelOffset - gap;
+		
+		// do some work to fix IE misreporting the document width
+		var ieFix = 0;
+		var isMSIE = /*@cc_on!@*/0;
+
+		if (isMSIE) {
+		 ieFix = getScrollerWidth() + 4;
+		} 
 				
 		// ---------------------------------------------------------------------------------------------------
 		
 		$(window).bind("scroll.portamento", function () {
 			
-			if($(window).height() > panel.outerHeight() && $(window).width() >= $(document).width()) { // don't scroll if the window isn't big enough
+			if($(window).height() > panel.outerHeight() && $(window).width() >= ($(document).width() - ieFix)) { // don't scroll if the window isn't big enough
 				
 				var y = $(document).scrollTop(); // current scroll position of the document
 												
