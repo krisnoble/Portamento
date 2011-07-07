@@ -10,7 +10,7 @@
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		
+
 		<!-- just some default styles, nothing important -->
 		<link rel="stylesheet" href="demo.css" />
 		
@@ -49,7 +49,7 @@
 			
 			<div id="wrapper">
 				<div id="content">
-					<p>This shows Portamento at work in a typical floated layout, with the sliding panel restricted to the confines of its wrapper.</p>
+					<p>This shows Portamento's default behaviour - no bottom boundary and a 10px gap from the top of the viewport.</p>
 					<p>Bacon ipsum dolor sit amet do t-bone laborum, ad ground round turkey ball tip. Veniam aliqua jowl, duis in t-bone sint tongue fugiat. Pork loin tenderloin ad, veniam chicken meatloaf.</p>
 					<p>Bacon ipsum dolor sit amet do t-bone laborum, ad ground round turkey ball tip. Veniam aliqua jowl, duis in t-bone sint tongue fugiat. Pork loin tenderloin ad, veniam chicken meatloaf.</p>
 					<p>Bacon ipsum dolor sit amet do t-bone laborum, ad ground round turkey ball tip. Veniam aliqua jowl, duis in t-bone sint tongue fugiat. Pork loin tenderloin ad, veniam chicken meatloaf.</p>
@@ -75,16 +75,15 @@
 			</div>
 
 			<footer>
-				<p>The sliding panel shouldn't go below the red line.</p>
+				<p>The sliding panel can cross the red line, as there is no bottom boundary.</p>
 				<p><small>Demo of <a href="../">Portamento</a> by Kris Noble 2011. Tasty filler text by <a href="http://baconipsum.com">Bacon Ipsum</a>.</small></p>
 			</footer>
 		</div>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-		<script src="../portamento.js"></script>
-		
+		<script src="../portamento2.js"></script>		
 		<script>
-			$('#sidebar').portamento({wrapper: $('#wrapper')});	// set #wrapper as the bottom boundary
+			$('#sidebar').portamento();	
 		</script>
 		
 	</body>
