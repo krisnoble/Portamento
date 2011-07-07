@@ -3,10 +3,16 @@
 	<head>
 		<title>Portamento Demo</title>
 		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta name="description" content="" />
 		<meta name="author" content="Kris Noble" />
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<!--[if IE 8]>
+			<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<![endif]-->
 		
 		<!-- just some default styles, nothing important -->
 		<link rel="stylesheet" href="demo.css" />
@@ -15,7 +21,7 @@
 		<style>
 			#wrapper {overflow: hidden;}
 			#content {width:486px; margin-right:10px; float:left; min-height:1200px;}
-			#sidebar {width:284px; padding:10px; background: #eee; float:right; height:600px;}
+			#sidebar {width:284px; padding:10px; background: #eee; float:right; height:400px;}
 			
 			#portamento_container {float:right; position:relative;} /* take the positioning of the sidebar, and become the start point for the sidebar positioning */
 			#portamento_container #sidebar {float:none; position:absolute;} /* no need to float anymore, become absolutely positoned */
