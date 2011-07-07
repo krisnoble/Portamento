@@ -1,6 +1,6 @@
 /**
  * 
- * Portamento  v1.0 - 2011-07-06
+ * Portamento  v1.0.1 - 2011-07-07
  * http://simianstudios.com/portamento
  * 
  * Creates a sliding panel that respects the boundaries of
