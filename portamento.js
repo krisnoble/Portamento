@@ -1,7 +1,10 @@
-/**
+/*!
  * 
- * Portamento  v1.0.1 - 2011-07-07
+ * Portamento  v1.1 - 2011-07-20
  * http://simianstudios.com/portamento
+ * 
+ */
+/**
  * 
  * Creates a sliding panel that respects the boundaries of
  * a given wrapper, and also has sensible behaviour if the
@@ -15,7 +18,7 @@
  * Uses a portion of CFT by Juriy Zaytsev aka Kangax:
  * http://kangax.github.com/cft/#IS_POSITION_FIXED_SUPPORTED
  * 
- * Uses code by Matthew Eernisse to detect scrollbar width:
+ * Uses code by Matthew Eernisse:
  * http://www.fleegix.org/articles/2006-05-30-getting-the-scrollbar-width-in-pixels
  * 
  * Builds on work by Remy Sharp:
@@ -32,7 +35,12 @@
   	
 	$.fn.portamento = function(options) {
 		
-		/*!
+		// we'll use the window and document objects a lot, so
+		// saving them as variables now saves a lot of function calls
+		var thisWindow = $(window);
+		var thisDocument = $(document);
+						
+		/**
 		 * NOTE by Kris - included here so as to avoid namespace clashes.
 		 * 
 		 * jQuery viewportOffset - v0.3 - 2/3/2010
@@ -152,10 +160,13 @@
 			return this;
 		}
 		
-		// wrap the floating panel in a div, then set a sensible min-height
+		// wrap the floating panel in a div, then set a sensible min-height and width
 		panel.wrap('<div id="portamento_container" />');
 		var float_container = $('#portamento_container');
-		float_container.css('min-height', panel.outerHeight()).css('width', panel.outerWidth());
+		float_container.css({
+			'min-height': panel.outerHeight(),
+			'width': panel.outerWidth()
+		});
 		
 		// calculate the upper scrolling boundary
 		var panelOffset = panel.offset().top;
@@ -163,25 +174,30 @@
 		var realPanelOffset = panelOffset - panelMargin;
 		var topScrollBoundary = realPanelOffset - gap;
 		
+		// a couple of numbers to account for margins and padding on the relevant elements
+		var wrapperPaddingFix = parseFloat(wrapper.css('paddingTop').replace(/auto/, 0));
+		var containerMarginFix = parseFloat(float_container.css('marginTop').replace(/auto/, 0));
+		
 		// do some work to fix IE misreporting the document width
 		var ieFix = 0;
+		
 		var isMSIE = /*@cc_on!@*/0;
-
+		
 		if (isMSIE) {
-		 ieFix = getScrollerWidth() + 4;
+			ieFix = getScrollerWidth() + 4;
 		} 
-				
+						
 		// ---------------------------------------------------------------------------------------------------
 		
-		$(window).bind("scroll.portamento", function () {
+		thisWindow.bind("scroll.portamento", function () {
 			
-			if($(window).height() > panel.outerHeight() && $(window).width() >= ($(document).width() - ieFix)) { // don't scroll if the window isn't big enough
+			if(thisWindow.height() > panel.outerHeight() && thisWindow.width() >= (thisDocument.width() - ieFix)) { // don't scroll if the window isn't big enough
 				
-				var y = $(document).scrollTop(); // current scroll position of the document
+				var y = thisDocument.scrollTop(); // current scroll position of the document
 												
 				if (y >= (topScrollBoundary)) { // if we're at or past the upper scrolling boundary
-					if((panel.innerHeight() - wrapper.viewportOffset().top) + gap >= (wrapper.height())) { // if we're at or past the bottom scrolling boundary
-						if(panel.hasClass('fixed') || $(window).height() >= panel.outerHeight()) { // check that there's work to do
+					if((panel.innerHeight() - wrapper.viewportOffset().top) - wrapperPaddingFix + gap >= wrapper.height()) { // if we're at or past the bottom scrolling boundary
+						if(panel.hasClass('fixed') || thisWindow.height() >= panel.outerHeight()) { // check that there's work to do
 							panel.removeClass('fixed');
 							panel.css('top', (wrapper.height() - panel.innerHeight()) + 'px');
 						}
@@ -190,12 +206,7 @@
 						
 						if(fullyCapableBrowser) { // supports position:fixed
 							panel.css('top', gap + 'px'); // to keep the gap
-						} else {
-							var absoluteCorrection = 0;
-							
-							if(panel.css('position') != 'absolute') {
-								var absoluteCorrection = panelOffset;
-							}
+						} else {							
 							panel.clearQueue();
 							panel.css('position', 'absolute').animate({top: (0 - float_container.viewportOffset().top + gap)});
 						}
@@ -212,27 +223,32 @@
 		
 		// ---------------------------------------------------------------------------------------------------
 		
-		$(window).bind("resize.portamento", function () {
-						
+		thisWindow.bind("resize.portamento", function () {						
 			// stop users getting undesirable behaviour if they resize the window too small
-			if($(window).height() <= panel.outerHeight() || $(window).width() < $(document).width()) {			
+			if(thisWindow.height() <= panel.outerHeight() || thisWindow.width() < thisDocument.width()) {			
 				if(panel.hasClass('fixed')) {
 					panel.removeClass('fixed');
 					panel.css('top', '0');
 				}				
 			} else {
-				$(window).trigger('scroll.portamento'); // trigger the scroll event to place the panel correctly
+				thisWindow.trigger('scroll.portamento'); // trigger the scroll event to place the panel correctly
 			}
 		});
 		
 		// ---------------------------------------------------------------------------------------------------
 		
-		// trigger the scroll event so that the panel is positioned correctly if the page loads anywhere other than the top.
-		$(window).trigger('scroll.portamento');
+		thisWindow.bind("orientationchange.portamento", function () {
+			// if device orientation changes, trigger the resize event
+			thisWindow.trigger('resize.portamento'); 
+		});
+		
+		// ---------------------------------------------------------------------------------------------------
+		
+		// trigger the scroll event immediately so that the panel is positioned correctly if the page loads anywhere other than the top.
+		thisWindow.trigger('scroll.portamento');
 		
 	    // return this to maintain chainability
-	    return this;
-	
+	    return this;	
 	};
 	
 	// set some sensible defaults
