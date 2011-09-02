@@ -1,7 +1,13 @@
 /*!
  * 
- * Portamento  v1.1 - 2011-07-20
+ * Portamento  v1.1.1 - 2011-09-02
  * http://simianstudios.com/portamento
+ *   
+ * Copyright 2011 Kris Noble except where noted.
+ * 
+ * Dual-licensed under the GPLv3 and Apache 2.0 licenses: 
+ * http://www.gnu.org/licenses/gpl-3.0.html
+ * http://www.apache.org/licenses/LICENSE-2.0
  * 
  */
 /**
@@ -9,6 +15,8 @@
  * Creates a sliding panel that respects the boundaries of
  * a given wrapper, and also has sensible behaviour if the
  * viewport is too small to display the whole panel.
+ * 
+ * Full documentation at http://simianstudios.com/portamento
  * 
  * ----
  * 
@@ -23,12 +31,6 @@
  * 
  * Builds on work by Remy Sharp:
  * http://jqueryfordesigners.com/fixed-floating-elements/
- * 
- * ----
- *  
- * Copyright 2011 Kris Noble except where noted.
- * Licensed under the GPLv3 license:
- * http://www.gnu.org/licenses/gpl-3.0.txt
  * 
  */
 (function($){
