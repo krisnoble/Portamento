@@ -149,6 +149,7 @@
 		var wrapper = opts.wrapper;
 		var gap = opts.gap;
 		var disableWorkaround = opts.disableWorkaround;		
+		var disableSensibleBehavior = opts.disableSensibleBehavior;
 		var fullyCapableBrowser = positionFixedSupported();
 		
 		if(panel.length != 1) {
@@ -193,7 +194,7 @@
 		
 		thisWindow.bind("scroll.portamento", function () {
 			
-			if(thisWindow.height() > panel.outerHeight() && thisWindow.width() >= (thisDocument.width() - ieFix)) { // don't scroll if the window isn't big enough
+			if(disableSensibleBehavior || (thisWindow.height() > panel.outerHeight() && thisWindow.width() >= (thisDocument.width() - ieFix))) { // don't scroll if the window isn't big enough
 				
 				var y = thisDocument.scrollTop(); // current scroll position of the document
 												
@@ -227,7 +228,7 @@
 		
 		thisWindow.bind("resize.portamento", function () {						
 			// stop users getting undesirable behaviour if they resize the window too small
-			if(thisWindow.height() <= panel.outerHeight() || thisWindow.width() < thisDocument.width()) {			
+			if(!disableSensibleBehavior && (thisWindow.height() <= panel.outerHeight() || thisWindow.width() < thisDocument.width())) {			
 				if(panel.hasClass('fixed')) {
 					panel.removeClass('fixed');
 					panel.css('top', '0');
@@ -257,7 +258,8 @@
 	$.fn.portamento.defaults = {
 	  'wrapper'				: $('body'), // the element that will act as the sliding panel's boundaries
 	  'gap'					: 10, // the gap (in pixels) left between the top of the viewport and the top of the panel
-	  'disableWorkaround' 	: false // option to disable the workaround for not-quite capable browsers 
+	  'disableWorkaround' 	: false, // option to disable the workaround for not-quite capable browsers 
+	  'disableSensibleBehavior' : false //option to stop scroll-stopping when the viewport is too small
 	};
 	
 })(jQuery);
