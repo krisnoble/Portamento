@@ -192,7 +192,7 @@
 						
 		// ---------------------------------------------------------------------------------------------------
 		
-		thisWindow.bind("scroll.portamento", function () {
+		thisWindow.bind("scroll.portamento", function (event) {
 			
 			if(disableSensibleBehavior || (thisWindow.height() > panel.outerHeight() && thisWindow.width() >= (thisDocument.width() - ieFix))) { // don't scroll if the window isn't big enough
 				
@@ -214,6 +214,7 @@
 							panel.css('position', 'absolute').animate({top: (0 - float_container.viewportOffset().top + gap)});
 						}
 					}
+					event.preventDefault();
 				} else {
 					// if we're above the top scroll boundary
 					panel.removeClass('fixed');
