@@ -33,6 +33,10 @@
  * http://jqueryfordesigners.com/fixed-floating-elements/
  * 
  */
+// Delegate .transition() calls to .animate()
+// if the browser can't do CSS transitions.
+if (!$.support.transition)
+  $.fn.transition = $.fn.animate;
 (function($){
   	
 	$.fn.portamento = function(options) {
@@ -199,7 +203,7 @@
 				var y = thisDocument.scrollTop(); // current scroll position of the document
 												
 				if (y >= (topScrollBoundary)) { // if we're at or past the upper scrolling boundary
-					if((panel.innerHeight() - wrapper.viewportOffset().top) - wrapperPaddingFix + gap >= wrapper.height()) { // if we're at or past the bottom scrolling boundary
+					if((panel.innerHeight() - wrapper.viewportOffset().top) - wrapperPaddingFix + gap >= wrapper[0].scrollHeight) { // if we're at or past the bottom scrolling boundary
 						if(panel.hasClass('fixed') || thisWindow.height() >= panel.outerHeight()) { // check that there's work to do
 							panel.removeClass('fixed');
 							panel.css('top', (wrapper.height() - panel.innerHeight()) + 'px');
@@ -211,7 +215,7 @@
 							panel.css('top', gap + 'px'); // to keep the gap
 						} else {							
 							panel.clearQueue();
-							panel.css('position', 'absolute').animate({top: (0 - float_container.viewportOffset().top + gap)});
+							panel.css('position', 'absolute').transition({top: (0 - float_container.viewportOffset().top + gap)});
 						}
 					}
 					event.preventDefault();
