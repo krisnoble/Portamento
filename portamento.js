@@ -33,6 +33,10 @@
  * http://jqueryfordesigners.com/fixed-floating-elements/
  * 
  */
+// Delegate .transition() calls to .animate()
+// if the browser can't do CSS transitions.
+if (!$.support.transition)
+  $.fn.transition = $.fn.animate;
 (function($){
   	
 	$.fn.portamento = function(options) {
@@ -149,6 +153,7 @@
 		var wrapper = opts.wrapper;
 		var gap = opts.gap;
 		var disableWorkaround = opts.disableWorkaround;		
+		var disableSensibleBehavior = opts.disableSensibleBehavior;
 		var fullyCapableBrowser = positionFixedSupported();
 		
 		if(panel.length != 1) {
@@ -191,14 +196,14 @@
 						
 		// ---------------------------------------------------------------------------------------------------
 		
-		thisWindow.bind("scroll.portamento", function () {
+		thisWindow.bind("scroll.portamento", function (event) {
 			
-			if(thisWindow.height() > panel.outerHeight() && thisWindow.width() >= (thisDocument.width() - ieFix)) { // don't scroll if the window isn't big enough
+			if(disableSensibleBehavior || (thisWindow.height() > panel.outerHeight() && thisWindow.width() >= (thisDocument.width() - ieFix))) { // don't scroll if the window isn't big enough
 				
 				var y = thisDocument.scrollTop(); // current scroll position of the document
 												
 				if (y >= (topScrollBoundary)) { // if we're at or past the upper scrolling boundary
-					if((panel.innerHeight() - wrapper.viewportOffset().top) - wrapperPaddingFix + gap >= wrapper.height()) { // if we're at or past the bottom scrolling boundary
+					if((panel.innerHeight() - wrapper.viewportOffset().top) - wrapperPaddingFix + gap >= wrapper[0].scrollHeight) { // if we're at or past the bottom scrolling boundary
 						if(panel.hasClass('fixed') || thisWindow.height() >= panel.outerHeight()) { // check that there's work to do
 							panel.removeClass('fixed');
 							panel.css('top', (wrapper.height() - panel.innerHeight()) + 'px');
@@ -210,9 +215,10 @@
 							panel.css('top', gap + 'px'); // to keep the gap
 						} else {							
 							panel.clearQueue();
-							panel.css('position', 'absolute').animate({top: (0 - float_container.viewportOffset().top + gap)});
+							panel.css('position', 'absolute').transition({top: (0 - float_container.viewportOffset().top + gap)});
 						}
 					}
+					event.preventDefault();
 				} else {
 					// if we're above the top scroll boundary
 					panel.removeClass('fixed');
@@ -227,7 +233,7 @@
 		
 		thisWindow.bind("resize.portamento", function () {						
 			// stop users getting undesirable behaviour if they resize the window too small
-			if(thisWindow.height() <= panel.outerHeight() || thisWindow.width() < thisDocument.width()) {			
+			if(!disableSensibleBehavior && (thisWindow.height() <= panel.outerHeight() || thisWindow.width() < thisDocument.width())) {			
 				if(panel.hasClass('fixed')) {
 					panel.removeClass('fixed');
 					panel.css('top', '0');
@@ -257,7 +263,8 @@
 	$.fn.portamento.defaults = {
 	  'wrapper'				: $('body'), // the element that will act as the sliding panel's boundaries
 	  'gap'					: 10, // the gap (in pixels) left between the top of the viewport and the top of the panel
-	  'disableWorkaround' 	: false // option to disable the workaround for not-quite capable browsers 
+	  'disableWorkaround' 	: false, // option to disable the workaround for not-quite capable browsers 
+	  'disableSensibleBehavior' : false //option to stop scroll-stopping when the viewport is too small
 	};
 	
 })(jQuery);
